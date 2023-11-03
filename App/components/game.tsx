@@ -3,6 +3,8 @@ import {Text, View} from 'react-native';
 
 type cardProps = {
   name: string;
+  styles: any;
+  image: string;
 };
 
 const GameCard = (props: cardProps) => {

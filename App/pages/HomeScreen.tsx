@@ -3,6 +3,8 @@ import {Pressable, View, StyleSheet, useWindowDimensions} from 'react-native';
 import {RouteProp} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import GameCard from '../components/game';
+import VStyles from '../styles/pages/vertical/HomeScreen.style';
+import HStyles from '../styles/pages/horizontal/HomeScreen.style';
 
 type RootStackParamList = {
   Home: undefined;
@@ -22,7 +24,7 @@ type Props = {
 
 const HomeScreen: FC<Props> = ({navigation}) => {
   const window = useWindowDimensions();
-  const [_orientation, setOrientation] = useState('portrait');
+  const [orientation, setOrientation] = useState('portrait');
 
   useEffect(() => {
     const newOrientation =
@@ -45,10 +47,22 @@ const HomeScreen: FC<Props> = ({navigation}) => {
   return (
     <View style={styles.container}>
       <Pressable onPress={() => goToGame('AEIOU')}>
-        <GameCard name="AEIOU" />
+        <GameCard
+          name="AEIOU"
+          styles={
+            orientation === 'portrait' ? VStyles.gameCard : HStyles.gameCard
+          }
+          image="/"
+        />
       </Pressable>
       <Pressable onPress={() => goToGame('ABCDE')}>
-        <GameCard name="ABCDE" />
+        <GameCard
+          name="ABCDE"
+          styles={
+            orientation === 'portrait' ? VStyles.gameCard : HStyles.gameCard
+          }
+          image="/"
+        />
       </Pressable>
     </View>
   );
