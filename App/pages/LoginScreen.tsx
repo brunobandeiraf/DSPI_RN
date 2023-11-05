@@ -1,8 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, {FC, useEffect, useState} from 'react';
 import {
   Pressable,
-  StyleSheet,
   Text,
   TextInput,
   View,
@@ -35,13 +33,9 @@ const LoginScreen: FC<Props> = ({navigation}) => {
     setOrientation(newOrientation);
   }, [window]);
 
-  const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
-  });
+  const goToSignup = () => {
+    navigation.navigate('Signup');
+  };
 
   return (
     <View
@@ -116,7 +110,8 @@ const LoginScreen: FC<Props> = ({navigation}) => {
                 orientation === 'portrait'
                   ? VStyles.registerContainer
                   : HStyles.registerContainer
-              }>
+              }
+              onPress={() => goToSignup()}>
               <Text
                 style={
                   orientation === 'portrait'

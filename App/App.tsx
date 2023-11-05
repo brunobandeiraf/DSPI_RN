@@ -4,10 +4,12 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import HomeScreen from './pages/HomeScreen';
 import QuizScreen from './pages/QuizScreen';
 import LoginScreen from './pages/LoginScreen';
+import SignupScreen from './pages/SingupScreen';
 
 export type RootStackParamList = {
   Login: undefined;
   Home: undefined;
+  Signup: undefined;
   Quiz: {quizName?: string};
 };
 
@@ -20,6 +22,11 @@ const App = () => {
         <Stack.Screen
           name="Login"
           component={LoginScreen}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Signup"
+          component={SignupScreen}
           options={{headerShown: false}}
         />
         <Stack.Screen
