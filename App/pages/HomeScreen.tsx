@@ -2,7 +2,7 @@ import React, {FC, useEffect, useState} from 'react';
 import {Pressable, View, StyleSheet, useWindowDimensions} from 'react-native';
 import {RouteProp} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import GameCard from '../components/game';
+import GameCard from './GameScreen';
 import VStyles from '../styles/pages/vertical/HomeScreen.style';
 import HStyles from '../styles/pages/horizontal/HomeScreen.style';
 import {RootStackParamList} from '../App';

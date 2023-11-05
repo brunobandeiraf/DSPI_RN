@@ -37,6 +37,10 @@ const LoginScreen: FC<Props> = ({navigation}) => {
     navigation.navigate('Signup');
   };
 
+  const login = () => {
+    navigation.navigate('Home');
+  };
+
   return (
     <View
       style={
@@ -133,7 +137,8 @@ const LoginScreen: FC<Props> = ({navigation}) => {
             orientation === 'portrait'
               ? VStyles.loginContainer
               : HStyles.loginContainer
-          }>
+          }
+          onPress={() => login()}>
           <Text
             style={orientation === 'portrait' ? VStyles.login : HStyles.login}>
             Logar
