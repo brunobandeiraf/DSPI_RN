@@ -5,11 +5,7 @@ import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import GameCard from '../components/game';
 import VStyles from '../styles/pages/vertical/HomeScreen.style';
 import HStyles from '../styles/pages/horizontal/HomeScreen.style';
-
-type RootStackParamList = {
-  Home: undefined;
-  Quiz: {quizName?: string};
-};
+import {RootStackParamList} from '../App';
 
 type HomeScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
