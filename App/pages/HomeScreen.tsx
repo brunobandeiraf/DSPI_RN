@@ -1,11 +1,12 @@
 import React, {FC, useEffect, useState} from 'react';
-import {Pressable, View, StyleSheet, useWindowDimensions} from 'react-native';
+import {Pressable, View, useWindowDimensions} from 'react-native';
 import {RouteProp} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import GameCard from './GameScreen';
+import GameCard from '../components/GameCard';
 import VStyles from '../styles/pages/vertical/HomeScreen.style';
 import HStyles from '../styles/pages/horizontal/HomeScreen.style';
 import {RootStackParamList} from '../App';
+import quizData from '../data.quiz';
 
 type HomeScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -28,36 +29,27 @@ const HomeScreen: FC<Props> = ({navigation}) => {
     setOrientation(newOrientation);
   }, [window]);
 
-  const goToGame = (gameName: string) => {
-    navigation.navigate('Quiz', {quizName: gameName});
+  const goToGame = (quizName: string, image: string, desc: string) => {
+    navigation.navigate('Quiz', {quizName: quizName, image: image, desc: desc});
   };
 
-  const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
-  });
-
   return (
-    <View style={styles.container}>
-      <Pressable onPress={() => goToGame('AEIOU')}>
+    <View
+      style={
+        orientation === 'portrait' ? VStyles.container : HStyles.container
+      }>
+      <Pressable
+        onPress={() => goToGame('AEIOU', quizData[1].url, quizData[1].desc)}>
         <GameCard
-          name="AEIOU"
-          styles={
-            orientation === 'portrait' ? VStyles.gameCard : HStyles.gameCard
-          }
-          image="/"
+          styles={orientation === 'portrait' ? VStyles : HStyles}
+          image={quizData[1].url}
         />
       </Pressable>
-      <Pressable onPress={() => goToGame('ABCDE')}>
+      <Pressable
+        onPress={() => goToGame('ABCDE', quizData[1].url, quizData[1].desc)}>
         <GameCard
-          name="ABCDE"
-          styles={
-            orientation === 'portrait' ? VStyles.gameCard : HStyles.gameCard
-          }
-          image="https://firebasestorage.googleapis.com/v0/b/champlibras.appspot.com/o/ABCDE.png?alt=media&token=806c9250-8d54-4748-ad6e-41e1db48bd37&_gl=1*1uiuhay*_ga*MTc2MzY4MTg3NC4xNjk5MDQzMTY1*_ga_CW55HF8NVT*MTY5OTE1MDQ3Ny40LjEuMTY5OTE1MjA2OC42MC4wLjA."
+          styles={orientation === 'portrait' ? VStyles : HStyles}
+          image={quizData[1].url}
         />
       </Pressable>
     </View>

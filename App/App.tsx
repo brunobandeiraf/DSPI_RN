@@ -10,7 +10,11 @@ export type RootStackParamList = {
   Login: undefined;
   Home: undefined;
   Signup: undefined;
-  Quiz: {quizName?: string};
+  Quiz: {
+    quizName: string;
+    image: string;
+    desc: string;
+  };
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
