@@ -11,6 +11,7 @@ import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RouteProp} from '@react-navigation/native';
 import VStyles from '../styles/pages/vertical/LoginScreen.style';
 import HStyles from '../styles/pages/horizontal/LoginScreen.style';
+import fetchLogin from '../fetchs/login';
 
 type LoginScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -26,6 +27,8 @@ type Props = {
 const LoginScreen: FC<Props> = ({navigation}) => {
   const window = useWindowDimensions();
   const [orientation, setOrientation] = useState('portrait');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   useEffect(() => {
     const newOrientation =
@@ -37,8 +40,22 @@ const LoginScreen: FC<Props> = ({navigation}) => {
     navigation.navigate('Signup');
   };
 
-  const login = () => {
-    navigation.navigate('Home');
+  const handleEmailChange = (text: string) => {
+    setEmail(text);
+  };
+
+  const handlePasswordChange = (text: string) => {
+    setPassword(text);
+  };
+
+  const login = async () => {
+    const result = await fetchLogin(email, password);
+
+    if (result.includes('error')) {
+      console.error(result);
+    } else {
+      navigation.navigate('Home');
+    }
   };
 
   return (
@@ -86,6 +103,8 @@ const LoginScreen: FC<Props> = ({navigation}) => {
             <TextInput
               style={orientation === 'portrait' ? VStyles.input : HStyles.input}
               placeholder="usuario@gmail.com"
+              value={email}
+              onChangeText={handleEmailChange}
             />
           </View>
           <View
@@ -103,6 +122,9 @@ const LoginScreen: FC<Props> = ({navigation}) => {
             <TextInput
               style={orientation === 'portrait' ? VStyles.input : HStyles.input}
               placeholder="senha"
+              value={password}
+              onChangeText={handlePasswordChange}
+              secureTextEntry={true}
             />
           </View>
           <View

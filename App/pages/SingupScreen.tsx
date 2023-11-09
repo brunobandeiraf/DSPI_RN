@@ -11,6 +11,7 @@ import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RouteProp} from '@react-navigation/native';
 import VStyles from '../styles/pages/vertical/LoginScreen.style';
 import HStyles from '../styles/pages/horizontal/LoginScreen.style';
+import fetchSignup from '../fetchs/signup';
 
 type SignupScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -26,6 +27,10 @@ type Props = {
 const SignupScreen: FC<Props> = ({navigation}) => {
   const window = useWindowDimensions();
   const [orientation, setOrientation] = useState('portrait');
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [repeatPassword, setRepeatPassword] = useState('');
 
   useEffect(() => {
     const newOrientation =
@@ -35,6 +40,37 @@ const SignupScreen: FC<Props> = ({navigation}) => {
 
   const goToLogin = () => {
     navigation.navigate('Login');
+  };
+
+  const handleNameChange = (text: string) => {
+    setName(text);
+  };
+
+  const handleEmailChange = (text: string) => {
+    setEmail(text);
+  };
+
+  const handlePasswordChange = (text: string) => {
+    setPassword(text);
+  };
+
+  const handleRepeatPasswordChange = (text: string) => {
+    setRepeatPassword(text);
+  };
+
+  const signup = async () => {
+    if (password !== repeatPassword) {
+      console.error('As senhas não coincidem');
+      return;
+    }
+
+    const result = await fetchSignup(name, email, password, repeatPassword);
+
+    if (result.includes('error')) {
+      console.error(result);
+    } else {
+      navigation.navigate('Login');
+    }
   };
 
   return (
@@ -85,6 +121,8 @@ const SignupScreen: FC<Props> = ({navigation}) => {
                   orientation === 'portrait' ? VStyles.input : HStyles.input
                 }
                 placeholder="usuario"
+                value={name}
+                onChangeText={handleNameChange}
               />
             </View>
             <View
@@ -104,6 +142,8 @@ const SignupScreen: FC<Props> = ({navigation}) => {
                   orientation === 'portrait' ? VStyles.input : HStyles.input
                 }
                 placeholder="usuario@gmail.com"
+                value={email}
+                onChangeText={handleEmailChange}
               />
             </View>
           </View>
@@ -125,6 +165,9 @@ const SignupScreen: FC<Props> = ({navigation}) => {
                   orientation === 'portrait' ? VStyles.input : HStyles.input
                 }
                 placeholder="senha"
+                value={password}
+                onChangeText={handlePasswordChange}
+                secureTextEntry={true}
               />
             </View>
             <View
@@ -144,6 +187,9 @@ const SignupScreen: FC<Props> = ({navigation}) => {
                   orientation === 'portrait' ? VStyles.input : HStyles.input
                 }
                 placeholder="senha"
+                value={repeatPassword}
+                onChangeText={handleRepeatPasswordChange}
+                secureTextEntry={true}
               />
             </View>
           </View>
@@ -179,7 +225,8 @@ const SignupScreen: FC<Props> = ({navigation}) => {
             orientation === 'portrait'
               ? VStyles.loginContainer
               : HStyles.loginContainer
-          }>
+          }
+          onPress={() => signup()}>
           <Text
             style={orientation === 'portrait' ? VStyles.login : HStyles.login}>
             Cadastrar

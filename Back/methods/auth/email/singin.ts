@@ -13,13 +13,14 @@ const loginUserAuth = async (email: string, password: string) => {
     const userEmail = userCredential.user?.email;
     const userName = userCredential.user?.name;
 
-    return { userId, userEmail, userName };
+    return JSON.stringify({ userId, userEmail, userName });
   } catch (error) {
     const errorCode = error.code;
     const errorMessage = error.message;
 
-    throw new Error(`${errorCode}: ${errorMessage}`);
+    return JSON.stringify({ error: `${errorCode}: ${errorMessage}` });
   }
 };
 
 export default loginUserAuth;
+

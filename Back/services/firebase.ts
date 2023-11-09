@@ -6,15 +6,19 @@ import { config } from "https://deno.land/x/dotenv@v3.2.2/mod.ts";
 const envVars = await config()
 
 const firebaseConfig = {
+    apiKey: "AIzaSyB4Qn02WLefQ-MHgcFMNt8XGkv6f97ZlZA",
 
-    apiKey: envVars.apiKey,
-    authDomain:  envVars.authDomain,
-    projectId:  envVars.projectId,
-    storageBucket:  envVars.storageBucket,
-    messagingSenderId:  envVars.messagingSenderId,
-    appId:  envVars.appId,
-    measurementId:  envVars.measurementId
+    authDomain: "champlibras.firebaseapp.com",
   
+    projectId: "champlibras",
+  
+    storageBucket: "champlibras.appspot.com",
+  
+    messagingSenderId: "129222075830",
+  
+    appId: "1:129222075830:web:935f383fe88af958c3cd17",
+  
+    measurementId: "G-7CLFE1Y9JE"  
 };
   
 const firebase = initializeApp(firebaseConfig);

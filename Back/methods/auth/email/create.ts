@@ -8,27 +8,28 @@ const createEmailAuth = async (name: string, email: string, pass: string, pass2:
       throw new Error("Senhas não coincidem");
     }
 
-    if (pass.length < 6) {
-      throw new Error("A senha deve ter pelo menos 6 caracteres");
+    let userId, userEmail;
+
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, email, pass);
+
+      if (!userCredential || !userCredential.user) {
+        throw new Error("Usuário não foi criado corretamente");
+      }
+
+      userId = userCredential.user?.uid;
+      userEmail = userCredential.user?.email;
+    } catch (createUserError) {
+      console.error("Erro durante a criação do usuário:", createUserError);
+      throw createUserError;
     }
-
-    const userCredential = await createUserWithEmailAndPassword(auth, email, pass);
-
-    if (!userCredential || !userCredential.user) {
-      throw new Error("Usuário não foi criado corretamente");
-    }
-
-    const userId = userCredential.user?.uid;
-    const userEmail = userCredential.user?.email;
 
     await createUserDoc(name, userId, userEmail);
 
-    return "create with sucess"
+    return "create with success";
   } catch (error) {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-
-    return new Error(`${errorCode}: ${errorMessage}`);
+    console.error("Erro durante a criação do usuário:", error);
+    return `Error: ${error.message}`;
   }
 };
 
