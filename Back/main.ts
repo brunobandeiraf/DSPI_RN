@@ -3,6 +3,8 @@ import { oakCors } from "https://deno.land/x/cors@v1.2.2/mod.ts";
 import createEmailAuth from "./methods/auth/email/create.ts";
 import IEmail from "./types/auth/email.ts";
 import loginUserAuth from "./methods/auth/email/singin.ts";
+import getUserPoints from "./methods/points/get.ts";
+import addUserPoints from "./methods/points/put.ts";
 
 const app = new Application();
 const router = new Router();
@@ -35,8 +37,29 @@ router
       ctx.response.body = { error: err };
     }
   })
-  .get("/points/get", (ctx) => {})
-  .put("/points/put", (ctx) => {});
+  .post("/points/get", async (ctx) => {
+    const body: { userid: string; } = await ctx.request.body().value;
+    const { userid } = body;
+
+    try {
+      const res = await getUserPoints(userid);
+      ctx.response.body = { message: res }; 
+    } catch (err) {
+      ctx.response.body = { error: err };
+    }
+  })
+  .post("/points/put", async (ctx) => {
+    const body: { userid: string; add: number;} = await ctx.request.body().value;
+    const { userid, add } = body;
+
+    try {
+      const res = await addUserPoints(userid, add);
+      ctx.response.body = { message: res }; 
+    } catch (err) {
+      ctx.response.body = { error: err };
+    }
+
+  });
 
 app.use(router.routes());
 app.use(router.allowedMethods());

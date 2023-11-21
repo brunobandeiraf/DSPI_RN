@@ -3,7 +3,7 @@
 pkgs.mkShell {
   packages = with pkgs; [
     nodejs
-    yarnv
+    yarn
     deno
     jdk11
     python311

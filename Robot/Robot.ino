@@ -4,7 +4,7 @@ BluetoothSerial SerialBT;
 
 void setup() {
   Serial.begin(115200);
-  SerialBT.begin("MeuESP32"); 
+  SerialBT.begin("MeuESP32");
 }
 
 void loop() {

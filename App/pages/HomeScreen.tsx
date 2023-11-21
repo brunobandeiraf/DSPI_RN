@@ -7,6 +7,7 @@ import VStyles from '../styles/pages/vertical/HomeScreen.style';
 import HStyles from '../styles/pages/horizontal/HomeScreen.style';
 import {RootStackParamList} from '../App';
 import quizData from '../data.quiz';
+import Navbar from '../components/navbar';
 
 type HomeScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -34,25 +35,28 @@ const HomeScreen: FC<Props> = ({navigation}) => {
   };
 
   return (
-    <View
-      style={
-        orientation === 'portrait' ? VStyles.container : HStyles.container
-      }>
-      <Pressable
-        onPress={() => goToGame('AEIOU', quizData[1].url, quizData[1].desc)}>
-        <GameCard
-          styles={orientation === 'portrait' ? VStyles : HStyles}
-          image={quizData[1].url}
-        />
-      </Pressable>
-      <Pressable
-        onPress={() => goToGame('ABCDE', quizData[1].url, quizData[1].desc)}>
-        <GameCard
-          styles={orientation === 'portrait' ? VStyles : HStyles}
-          image={quizData[1].url}
-        />
-      </Pressable>
-    </View>
+    <>
+      <Navbar />
+      <View
+        style={
+          orientation === 'portrait' ? VStyles.container : HStyles.container
+        }>
+        <Pressable
+          onPress={() => goToGame('AEIOU', quizData[1].url, quizData[1].desc)}>
+          <GameCard
+            styles={orientation === 'portrait' ? VStyles : HStyles}
+            image={quizData[1].url}
+          />
+        </Pressable>
+        <Pressable
+          onPress={() => goToGame('ABCDE', quizData[1].url, quizData[1].desc)}>
+          <GameCard
+            styles={orientation === 'portrait' ? VStyles : HStyles}
+            image={quizData[1].url}
+          />
+        </Pressable>
+      </View>
+    </>
   );
 };
 

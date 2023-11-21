@@ -5,6 +5,7 @@ import {RootStackParamList} from '../App';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import VStyles from '../styles/pages/vertical/QuizScreen.style';
 import HStyles from '../styles/pages/horizontal/QuizScreen.style';
+import Navbar from '../components/navbar';
 
 type QuizScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -29,78 +30,81 @@ const QuizScreen: FC<Props> = ({route, navigation}) => {
   }, [window]);
 
   const goToQuiz = () => {
-    navigation.navigate('Home');
+    navigation.navigate('Game');
   };
 
   return (
-    <View
-      style={
-        orientation === 'portrait' ? VStyles.container : HStyles.container
-      }>
-      <Image
-        source={{uri: `${image}`}}
-        style={
-          orientation === 'portrait' ? VStyles.gameImage : HStyles.gameImage
-        }
-      />
+    <>
+      <Navbar />
       <View
         style={
-          orientation === 'portrait' ? VStyles.contentBox : HStyles.contentBox
+          orientation === 'portrait' ? VStyles.container : HStyles.container
         }>
+        <Image
+          source={{uri: `${image}`}}
+          style={
+            orientation === 'portrait' ? VStyles.gameImage : HStyles.gameImage
+          }
+        />
         <View
           style={
-            orientation === 'portrait'
-              ? VStyles.textContainer
-              : HStyles.textContainer
+            orientation === 'portrait' ? VStyles.contentBox : HStyles.contentBox
           }>
           <View
             style={
               orientation === 'portrait'
-                ? VStyles.titleContainer
-                : HStyles.titleContainer
+                ? VStyles.textContainer
+                : HStyles.textContainer
             }>
-            <Text
-              style={
-                orientation === 'portrait' ? VStyles.title : HStyles.title
-              }>
-              {quizName}
-            </Text>
             <View
               style={
                 orientation === 'portrait'
-                  ? VStyles.pointsBox
-                  : HStyles.pointsBox
+                  ? VStyles.titleContainer
+                  : HStyles.titleContainer
               }>
-              <Image source={require('../assets/star.png')} />
               <Text
                 style={
-                  orientation === 'portrait' ? VStyles.points : HStyles.points
+                  orientation === 'portrait' ? VStyles.title : HStyles.title
                 }>
-                50
+                {quizName}
               </Text>
+              <View
+                style={
+                  orientation === 'portrait'
+                    ? VStyles.pointsBox
+                    : HStyles.pointsBox
+                }>
+                <Image source={require('../assets/star.png')} />
+                <Text
+                  style={
+                    orientation === 'portrait' ? VStyles.points : HStyles.points
+                  }>
+                  50
+                </Text>
+              </View>
             </View>
+            <Text
+              style={orientation === 'portrait' ? VStyles.desc : HStyles.desc}>
+              {desc}
+            </Text>
           </View>
-          <Text
-            style={orientation === 'portrait' ? VStyles.desc : HStyles.desc}>
-            {desc}
-          </Text>
-        </View>
-        <Pressable
-          onPress={() => goToQuiz()}
-          style={
-            orientation === 'portrait' ? VStyles.buttonBox : HStyles.buttonBox
-          }>
-          <Text
+          <Pressable
+            onPress={() => goToQuiz()}
             style={
-              orientation === 'portrait'
-                ? VStyles.buttonText
-                : HStyles.buttonText
+              orientation === 'portrait' ? VStyles.buttonBox : HStyles.buttonBox
             }>
-            Comecar
-          </Text>
-        </Pressable>
+            <Text
+              style={
+                orientation === 'portrait'
+                  ? VStyles.buttonText
+                  : HStyles.buttonText
+              }>
+              Comecar
+            </Text>
+          </Pressable>
+        </View>
       </View>
-    </View>
+    </>
   );
 };
 
