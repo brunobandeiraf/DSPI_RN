@@ -7,6 +7,7 @@ import LoginScreen from './pages/LoginScreen';
 import SignupScreen from './pages/SingupScreen';
 import GameScreen from './pages/GameScreen';
 import {BluetoothProvider} from './context/BluetoothContext';
+//import {BluetoothProvider} from './context/BluetoothContext';
 
 export type RootStackParamList = {
   Login: undefined;
