@@ -8,6 +8,7 @@ import HStyles from '../styles/pages/horizontal/HomeScreen.style';
 import {RootStackParamList} from '../App';
 import quizData from '../data.quiz';
 import Navbar from '../components/navbar';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 type HomeScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -23,6 +24,23 @@ type Props = {
 const HomeScreen: FC<Props> = ({navigation}) => {
   const window = useWindowDimensions();
   const [orientation, setOrientation] = useState('portrait');
+
+  const getItem = async () => {
+    const res = await AsyncStorage.getItem('@user');
+    return res;
+  };
+
+  useEffect(() => {
+    try {
+      const value = getItem();
+      console.log(value);
+      if (value !== null) {
+        //navigation.navigate('Login');
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
 
   useEffect(() => {
     const newOrientation =
