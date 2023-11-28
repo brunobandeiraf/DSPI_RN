@@ -11,6 +11,7 @@ import {
 // EXT
 import {RootStackParamList} from '../App';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {RouteProp} from '@react-navigation/native';
 
 // STYLES
@@ -57,10 +58,10 @@ const LoginScreen: FC<Props> = ({navigation}) => {
 
   const login = async () => {
     const result = await fetchLogin(email, password);
-
     if (result.includes('error')) {
       console.error(result);
     } else {
+      await AsyncStorage.setItem('@user', 'AtZlwcrrOxPC0zWKlyLIDPvXHj33');
       navigation.navigate('Home');
     }
   };
