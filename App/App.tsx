@@ -6,6 +6,7 @@ import QuizScreen from './pages/QuizScreen';
 import LoginScreen from './pages/LoginScreen';
 import SignupScreen from './pages/SingupScreen';
 import GameScreen from './pages/GameScreen';
+import TestScreen from './pages/TestScreen';
 
 export type RootStackParamList = {
   Login: undefined;
@@ -17,6 +18,7 @@ export type RootStackParamList = {
     desc: string;
   };
   Game: undefined;
+  Test: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -48,6 +50,11 @@ const App = () => {
         <Stack.Screen
           name="Game"
           component={GameScreen}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Test"
+          component={TestScreen}
           options={{headerShown: false}}
         />
       </Stack.Navigator>

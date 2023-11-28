@@ -54,7 +54,7 @@ const HomeScreen: FC<Props> = ({navigation}) => {
 
   return (
     <>
-      <Navbar />
+      <Navbar navigation={navigation} />
       <View
         style={
           orientation === 'portrait' ? VStyles.container : HStyles.container
