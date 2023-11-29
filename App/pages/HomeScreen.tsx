@@ -53,28 +53,9 @@ const HomeScreen: FC<Props> = ({navigation}) => {
   };
 
   return (
-    <>
-      <Navbar navigation={navigation} />
-      <View
-        style={
-          orientation === 'portrait' ? VStyles.container : HStyles.container
-        }>
-        <Pressable
-          onPress={() => goToGame('AEIOU', quizData[1].url, quizData[1].desc)}>
-          <GameCard
-            styles={orientation === 'portrait' ? VStyles : HStyles}
-            image={quizData[1].url}
-          />
-        </Pressable>
-        <Pressable
-          onPress={() => goToGame('ABCDE', quizData[1].url, quizData[1].desc)}>
-          <GameCard
-            styles={orientation === 'portrait' ? VStyles : HStyles}
-            image={quizData[1].url}
-          />
-        </Pressable>
-      </View>
-    </>
+    <View style={VStyles.container}>
+      
+    </View>
   );
 };
 

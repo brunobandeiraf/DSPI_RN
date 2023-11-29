@@ -38,6 +38,8 @@ const LoginScreen: FC<Props> = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  console.log(email);
+
   useEffect(() => {
     const newOrientation =
       window.width > window.height ? 'landscape' : 'portrait';
@@ -77,26 +79,30 @@ const LoginScreen: FC<Props> = ({navigation}) => {
         <View style={VStyles.midContainer}>
             <View style={VStyles.inpsOut}>
                 <Text style={VStyles.innerTitle}>Email</Text>
-                <TextInput style={VStyles.inp} placeholder='ex@email.com'/>
+                <TextInput style={VStyles.inp} 
+                  value={email}
+                  onChangeText={handleEmailChange}
+                  placeholder='ex@email.com'/>
             </View>
             <View style={VStyles.inpsOut}>
                 <Text style={VStyles.innerTitle}>Password</Text>
-                <TextInput secureTextEntry={true} styles={VStyles.inp} placeholder='********'/>
+                <TextInput secureTextEntry={true} style={VStyles.inp} 
+                value={password}
+                onChangeText={handlePasswordChange}
+                placeholder='********'/>
             </View>
             <View style={VStyles.inpsOut}>
-                <TouchableOpacity styles={VStyles.bt}>
-                    <Text>Entrar</Text>
+                <TouchableOpacity onPress={()=>login()} style={VStyles.bt}>
+                    <Text style={VStyles.btin}>Entrar</Text>
                 </TouchableOpacity>
             </View>
 
         </View>
 
-        <View style={VStyles.secondCont}>
-            <TouchableOpacity style={VStyles.registerOut} onPress={()=>goToSignup()}>
-                <Text style={VStyles.registerText1}>Ainda não tem cadastro?</Text>
-                <Text style={VStyles.registerText2}>Clique aqui</Text>
-            </TouchableOpacity>
-        </View>
+        <TouchableOpacity style={VStyles.registerOut} onPress={()=>goToSignup()}>
+            <Text style={VStyles.registerText1}>Ainda não tem cadastro?</Text>
+            <Text style={VStyles.registerText2}>Clique aqui</Text>
+        </TouchableOpacity>
     </View>
   );
 };

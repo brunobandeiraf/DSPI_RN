@@ -19,6 +19,36 @@ const VStyles = StyleSheet.create({
     alignItems: "center",
     gap: 10
   },
+  midContainer: {
+    gap: 20,
+    width: width - 100
+  },
+  innerTitle: {
+    fontWeight: "700",
+    fontSize: 18
+  },
+  inpsOut: {
+    gap: 10
+  },
+  bt: {
+    width: width - 100,
+    backgroundColor: "#FB3131",
+    padding: 10,
+    alignItems: "center",
+    borderRadius: 5
+  },
+  btin: {
+    color: "white",
+    fontSize: 18,
+  },
+  inp: {
+    borderRadius: 5,
+    borderColor: "#FB313140",
+    borderWidth: 2,
+    paddingLeft: 10,
+    paddingRight: 10,
+
+  },
   title:{
     fontSize: 38,
     color: "#FB3131",
