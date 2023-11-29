@@ -8,12 +8,12 @@
 #include <PubSubClient.h>
 #include <WiFiClientSecure.h>
 
-const char* ssid = "wifi";
-const char* password = "senha";
+const char* ssid = "LAB_MAKER";
+const char* password = "Espaco@Maker2017";
 
 const char* mqtt_server = "02d7d2d555084a4492039686d9f5b9a3.s1.eu.hivemq.cloud";
-const char* mqtt_username = "Usuario";
-const char* mqtt_password = "senha";
+const char* mqtt_username = "fullzer4";
+const char* mqtt_password = "Dp031001#";
 const int mqtt_port =8883;
 
 WiFiClientSecure espClient;

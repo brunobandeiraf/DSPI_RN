@@ -54,8 +54,8 @@ func main() {
 	opts := mqtt.NewClientOptions()
 	opts.AddBroker("tls://02d7d2d555084a4492039686d9f5b9a3.s1.eu.hivemq.cloud:8883") 
 	opts.SetClientID("back_go")             
-	opts.SetUsername("usuario")        
-	opts.SetPassword("senha")         
+	opts.SetUsername("fullzer4")        
+	opts.SetPassword("Dp031001#")         
 
 	opts.SetDefaultPublishHandler(messagePubHandler)
 	opts.OnConnect = connectHandler
