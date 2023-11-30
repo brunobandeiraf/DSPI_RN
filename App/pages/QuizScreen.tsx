@@ -19,7 +19,7 @@ type Props = {
 };
 
 const QuizScreen: FC<Props> = ({route, navigation}) => {
-  const {quizName, image, desc} = route.params;
+  const {quizName, image, desc, points} = route.params;
   const window = useWindowDimensions();
   const [orientation, setOrientation] = useState('portrait');
 

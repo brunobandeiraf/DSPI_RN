@@ -16,6 +16,7 @@ export type RootStackParamList = {
     quizName: string;
     image: string;
     desc: string;
+    points: number;
   };
   Game: undefined;
   Test: undefined;

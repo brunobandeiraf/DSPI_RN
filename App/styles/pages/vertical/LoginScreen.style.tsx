@@ -25,7 +25,8 @@ const VStyles = StyleSheet.create({
   },
   innerTitle: {
     fontWeight: "700",
-    fontSize: 18
+    fontSize: 18,
+    color: "black"
   },
   inpsOut: {
     gap: 10
@@ -47,6 +48,7 @@ const VStyles = StyleSheet.create({
     borderWidth: 2,
     paddingLeft: 10,
     paddingRight: 10,
+    color: "black"
 
   },
   title:{

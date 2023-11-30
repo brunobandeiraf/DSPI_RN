@@ -85,7 +85,7 @@ const LoginScreen: FC<Props> = ({navigation}) => {
                   placeholder='ex@email.com'/>
             </View>
             <View style={VStyles.inpsOut}>
-                <Text style={VStyles.innerTitle}>Password</Text>
+                <Text style={VStyles.innerTitle}>Senha</Text>
                 <TextInput secureTextEntry={true} style={VStyles.inp} 
                 value={password}
                 onChangeText={handlePasswordChange}

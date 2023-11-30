@@ -1,10 +1,9 @@
 import React, {FC, useEffect, useState} from 'react';
-import {Pressable, View, useWindowDimensions} from 'react-native';
+import {Pressable, View, useWindowDimensions,Text, Touchable, TouchableOpacity, Image} from 'react-native';
 import {RouteProp} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import GameCard from '../components/GameCard';
 import VStyles from '../styles/pages/vertical/HomeScreen.style';
-import HStyles from '../styles/pages/horizontal/HomeScreen.style';
 import {RootStackParamList} from '../App';
 import quizData from '../data.quiz';
 import Navbar from '../components/navbar';
@@ -24,6 +23,11 @@ type Props = {
 const HomeScreen: FC<Props> = ({navigation}) => {
   const window = useWindowDimensions();
   const [orientation, setOrientation] = useState('portrait');
+  const [gameTitle, setGameTitle] = useState('');
+  const [gamePoints, setGamePoints] = useState(0);
+  const [gameDesc, setGameDesc] = useState('');
+  const [gameImg, setGameImg] = useState('');
+  const [gameClass, setGameClass] = useState('none');
 
   const getItem = async () => {
     const res = await AsyncStorage.getItem('@user');
@@ -48,13 +52,71 @@ const HomeScreen: FC<Props> = ({navigation}) => {
     setOrientation(newOrientation);
   }, [window]);
 
-  const goToGame = (quizName: string, image: string, desc: string) => {
-    navigation.navigate('Quiz', {quizName: quizName, image: image, desc: desc});
+  const goToGame = () => {
+    navigation.navigate('Quiz', {quizName: gameTitle, image: gameImg, desc: gameDesc, points: gamePoints});
   };
 
+  const openGame = (quizName: string, image: string, desc: string, points: number) => {
+    setGameTitle(quizName);
+    setGamePoints(points);
+    setGameDesc(desc);
+    setGameImg(image);
+    setGameClass("block");
+  };
+  
+  
+  const getGames = () => {
+    return quizData.map(i => (
+        <TouchableOpacity key={quizData.indexOf(i)} onPress={()=>openGame(i.title, i.url, i.desc, i.points)} style={VStyles.card}>
+            <View style={VStyles.blackout}>
+              <Text style={VStyles.blackouttext}>{i.title}</Text>
+            </View>
+            <Image style={VStyles.imageCard} source={{uri: `${i.url}`}}/>
+        </TouchableOpacity>
+    ));
+  }
   return (
     <View style={VStyles.container}>
-      
+      <View style={VStyles.header}>
+        <View style={VStyles.headerin}>
+          <View style={VStyles.user}></View>
+          <Text style={VStyles.textheader}>Nome de usuário</Text>
+        </View>
+
+        <View style={VStyles.headerin}>
+          <Image source={require('../assets/str.png')} />
+          <Text style={VStyles.textheaderpoints}>00</Text>
+        </View>
+      </View>
+
+      <View style={VStyles.content}>
+        <Text style={VStyles.title}>Jogos</Text>
+        <View style={VStyles.gamesout}>
+          {getGames()}
+        </View>
+      </View>
+
+      {/* SHOW GAME INFOS  */}
+      <View style={[VStyles.screenOut, {display: gameClass}]}>
+        <View style={VStyles.gameInfosOut}>
+          <View style={VStyles.topInfos}>
+            <Text style={VStyles.titleGame}>{gameTitle}</Text>
+            <View style={VStyles.pointsOut}>
+              <Image source={require('../assets/str.png')} />
+              <Text style={VStyles.pointsGame}>{gamePoints}</Text>
+            </View>
+          </View>
+          <Text style={VStyles.descGame}>{gameDesc}</Text>
+
+          <TouchableOpacity onPress={()=>goToGame()} style={VStyles.startGame}>
+            <Text style={VStyles.startGameText}>Jogar</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity onPress={()=>setGameClass("none")}>
+            <Text style={VStyles.fecharJogo}>Fechar</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
     </View>
   );
 };
