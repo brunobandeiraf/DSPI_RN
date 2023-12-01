@@ -77,6 +77,7 @@ const VogalGame: FC<Props> = ({navigation}) => {
             nextPage={()=>nextp()} 
             voltar={()=>voltar()} 
             leave={()=>backHome()}
+            letter='A'
         />,
         <Second
             nextPage={()=>nextp()} 
@@ -92,13 +93,71 @@ const VogalGame: FC<Props> = ({navigation}) => {
             nextPage={(e:string)=>nextp(e)} 
             voltar={()=>voltar()} 
             leave={()=>backHome()}
+            letter='A'
         />,
         <Result
             nextPage={()=>nextp()} 
             voltar={()=>voltar()} 
             leave={()=>backHome()}
             res={lastAnsw}
-        />
+        />,
+        <First
+            nextPage={()=>nextp()} 
+            voltar={()=>voltar()} 
+            leave={()=>backHome()}
+            letter='E'
+        />,
+        <Quiz1
+            nextPage={(e:string)=>nextp(e)} 
+            voltar={()=>voltar()} 
+            leave={()=>backHome()}
+            letter='E'
+        />,
+        <Result
+            nextPage={()=>nextp()} 
+            voltar={()=>voltar()} 
+            leave={()=>backHome()}
+            res={lastAnsw}
+        />,
+        
+        <First
+            nextPage={()=>nextp()} 
+            voltar={()=>voltar()} 
+            leave={()=>backHome()}
+            letter='I'
+        />,
+        <Quiz1
+            nextPage={(e:string)=>nextp(e)} 
+            voltar={()=>voltar()} 
+            leave={()=>backHome()}
+            letter='I'
+        />,
+        <Result
+            nextPage={()=>nextp()} 
+            voltar={()=>voltar()} 
+            leave={()=>backHome()}
+            res={lastAnsw}
+        />,
+        
+        <First
+            nextPage={()=>nextp()} 
+            voltar={()=>voltar()} 
+            leave={()=>backHome()}
+            letter='O'
+        />,
+        <Quiz1
+            nextPage={(e:string)=>nextp(e)} 
+            voltar={()=>voltar()} 
+            leave={()=>backHome()}
+            letter='O'
+        />,
+        <Result
+            nextPage={()=>nextp()} 
+            voltar={()=>voltar()} 
+            leave={()=>backHome()}
+            res={lastAnsw}
+        />,
+        
     ];
 
     if(!partes[nowPage]) backHome();

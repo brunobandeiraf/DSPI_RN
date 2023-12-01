@@ -72,7 +72,9 @@ const LoginScreen: FC<Props> = ({navigation}) => {
       setMsg("")
     }
   };
-  navigation.navigate('Home');
+
+
+  // navigation.navigate('Home');
 
   return (
     <View

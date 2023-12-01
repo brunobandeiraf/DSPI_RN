@@ -41,6 +41,7 @@ const VStyles = StyleSheet.create({
     width: width,
     gap: 5,
     justifyContent: "center",
+    flexWrap: "wrap"
   },
   showImgOut:{
     width: width,
