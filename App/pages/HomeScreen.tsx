@@ -1,5 +1,5 @@
 import React, {FC, useEffect, useState} from 'react';
-import {Pressable, View, useWindowDimensions,Text, Touchable, TouchableOpacity, Image} from 'react-native';
+import {Pressable, View, useWindowDimensions,Text, Touchable, TouchableOpacity, Image, Vibration} from 'react-native';
 import {RouteProp} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import GameCard from '../components/GameCard';
@@ -28,6 +28,7 @@ const HomeScreen: FC<Props> = ({navigation}) => {
   const [gameDesc, setGameDesc] = useState('');
   const [gameImg, setGameImg] = useState('');
   const [gameClass, setGameClass] = useState('none');
+  const [urlGame, setGameUrl] = useState('');
 
   const getItem = async () => {
     const res = await AsyncStorage.getItem('@user');
@@ -53,21 +54,22 @@ const HomeScreen: FC<Props> = ({navigation}) => {
   }, [window]);
 
   const goToGame = () => {
-    navigation.navigate('Quiz', {quizName: gameTitle, image: gameImg, desc: gameDesc, points: gamePoints});
+    navigation.navigate(urlGame ? urlGame : "Desi");
   };
 
-  const openGame = (quizName: string, image: string, desc: string, points: number) => {
+  const openGame = (quizName: string, image: string, desc: string, points: number, url: string) => {
     setGameTitle(quizName);
     setGamePoints(points);
     setGameDesc(desc);
     setGameImg(image);
+    setGameUrl(url)
     setGameClass("block");
   };
   
   
   const getGames = () => {
     return quizData.map(i => (
-        <TouchableOpacity key={quizData.indexOf(i)} onPress={()=>openGame(i.title, i.url, i.desc, i.points)} style={VStyles.card}>
+        <TouchableOpacity key={quizData.indexOf(i)} onPress={()=>openGame(i.title, i.url, i.desc, i.points, i.page)} style={VStyles.card}>
             <View style={VStyles.blackout}>
               <Text style={VStyles.blackouttext}>{i.title}</Text>
             </View>

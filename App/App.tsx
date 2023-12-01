@@ -2,23 +2,18 @@ import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import HomeScreen from './pages/HomeScreen';
-import QuizScreen from './pages/QuizScreen';
 import LoginScreen from './pages/LoginScreen';
 import SignupScreen from './pages/SingupScreen';
-import GameScreen from './pages/GameScreen';
 import TestScreen from './pages/TestScreen';
+import VogalGame from './pages/games/Vogais';
+import DesiGame from './pages/games/Desi';
 
 export type RootStackParamList = {
   Login: undefined;
   Home: undefined;
   Signup: undefined;
-  Quiz: {
-    quizName: string;
-    image: string;
-    desc: string;
-    points: number;
-  };
-  Game: undefined;
+  Vogais: undefined;
+  Desi: undefined;
   Test: undefined;
 };
 
@@ -44,18 +39,18 @@ const App = () => {
           options={{headerShown: false}}
         />
         <Stack.Screen
-          name="Quiz"
-          component={QuizScreen}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="Game"
-          component={GameScreen}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
           name="Test"
           component={TestScreen}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Vogais"
+          component={VogalGame}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Desi"
+          component={DesiGame}
           options={{headerShown: false}}
         />
       </Stack.Navigator>

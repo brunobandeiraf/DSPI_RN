@@ -5,7 +5,8 @@ import {
   TextInput,
   View,
   useWindowDimensions,
-  TouchableOpacity
+  TouchableOpacity,
+  Vibration
 } from 'react-native';
 
 // EXT
@@ -37,6 +38,7 @@ const LoginScreen: FC<Props> = ({navigation}) => {
   const [orientation, setOrientation] = useState('portrait');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [msg, setMsg] = useState('');
 
   console.log(email);
 
@@ -59,14 +61,18 @@ const LoginScreen: FC<Props> = ({navigation}) => {
   };
 
   const login = async () => {
+    setMsg("Carregando");
     const result = await fetchLogin(email, password);
     if (result.includes('error')) {
       console.error(result);
+      setMsg("Tente novamente")
     } else {
       await AsyncStorage.setItem('@user', 'AtZlwcrrOxPC0zWKlyLIDPvXHj33');
-      navigation.navigate('Home');
+      Vibration.vibrate(1000);
+      setMsg("")
     }
   };
+  navigation.navigate('Home');
 
   return (
     <View
@@ -96,6 +102,8 @@ const LoginScreen: FC<Props> = ({navigation}) => {
                     <Text style={VStyles.btin}>Entrar</Text>
                 </TouchableOpacity>
             </View>
+
+            <Text>{msg}</Text>
 
         </View>
 
