@@ -70,11 +70,11 @@ const LoginScreen: FC<Props> = ({navigation}) => {
       await AsyncStorage.setItem('@user', 'AtZlwcrrOxPC0zWKlyLIDPvXHj33');
       Vibration.vibrate(1000);
       setMsg("")
+      navigation.navigate('Home');
     }
   };
 
 
-  // navigation.navigate('Home');
 
   return (
     <View
