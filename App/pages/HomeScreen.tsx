@@ -25,27 +25,39 @@ const HomeScreen: FC<Props> = ({navigation}) => {
   const [orientation, setOrientation] = useState('portrait');
   const [gameTitle, setGameTitle] = useState('');
   const [gamePoints, setGamePoints] = useState(0);
+  const [gamePoints2, setGamePoints2] = useState(0);
   const [gameDesc, setGameDesc] = useState('');
   const [gameImg, setGameImg] = useState('');
   const [gameClass, setGameClass] = useState('none');
   const [urlGame, setGameUrl] = useState('');
 
-  const getItem = async () => {
-    const res = await AsyncStorage.getItem('@user');
-    return res;
-  };
+  const [userName, setUserName] = useState('');
+  
+  useEffect(()=>{
+    const getUser = async () => {
+      let res: any = await AsyncStorage.getItem("@user");
+      setUserName(res);
 
-  useEffect(() => {
-    try {
-      const value = getItem();
-      console.log(value);
-      if (value !== null) {
-        //navigation.navigate('Login');
-      }
-    } catch (error) {
-      console.log(error);
+      
+    
     }
-  }, []);
+    
+    getUser();
+  },[userName])
+
+  
+  useEffect(()=>{
+
+    fetch(`https://nbrasil.online/dspi/points?user=${userName}`)
+    .then(e=>e.text())
+    .then(e=>{
+      setGamePoints2(Number(e))
+      console.log(e);
+    });
+
+  },[gamePoints2])
+
+
 
   useEffect(() => {
     const newOrientation =
@@ -82,12 +94,12 @@ const HomeScreen: FC<Props> = ({navigation}) => {
       <View style={VStyles.header}>
         <View style={VStyles.headerin}>
           <View style={VStyles.user}></View>
-          <Text style={VStyles.textheader}>Nome de usuário</Text>
+          <Text style={VStyles.textheader}>{userName}</Text>
         </View>
 
         <View style={VStyles.headerin}>
           <Image source={require('../assets/str.png')} />
-          <Text style={VStyles.textheaderpoints}>00</Text>
+          <Text style={VStyles.textheaderpoints}>{gamePoints2}</Text>
         </View>
       </View>
 
@@ -105,7 +117,7 @@ const HomeScreen: FC<Props> = ({navigation}) => {
             <Text style={VStyles.titleGame}>{gameTitle}</Text>
             <View style={VStyles.pointsOut}>
               <Image source={require('../assets/str.png')} />
-              <Text style={VStyles.pointsGame}>{gamePoints}</Text>
+              <Text style={VStyles.pointsGame}>25</Text>
             </View>
           </View>
           <Text style={VStyles.descGame}>{gameDesc}</Text>

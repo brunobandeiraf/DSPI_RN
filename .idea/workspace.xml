@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="49f8802f-ec56-431d-a35a-356012c76b9b" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/App/pages/HomeScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/App/pages/HomeScreen.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/styles/pages/vertical/HomeScreen.style.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/App/styles/pages/vertical/HomeScreen.style.tsx" afterDir="false" />
-    </list>
+    <list default="true" id="49f8802f-ec56-431d-a35a-356012c76b9b" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

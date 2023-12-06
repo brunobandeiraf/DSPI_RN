@@ -42,6 +42,17 @@ const VogalGame: FC<Props> = ({navigation}) => {
     const [nowPage, setNowPage] = useState(0);
     const [lastAnsw, setNewAnsw] = useState(false);
 
+    const [userName, setUserName] = useState('');
+  
+  useEffect(()=>{
+    const getUser = async () => {
+      let res: any = await AsyncStorage.getItem("@user");
+      setUserName(res);
+      console.log(res, "asfd");
+    }
+    getUser();
+  },[userName])
+
     const nextp = (correctAnsw?:string) => {
         if(correctAnsw){
             if(correctAnsw == "acertou"){
@@ -61,6 +72,7 @@ const VogalGame: FC<Props> = ({navigation}) => {
 
     const backHome = () => {
         navigation.navigate("Home");
+        fetch("https://nbrasil.online/dspi/points");
     }
     
     const partes = [
@@ -160,7 +172,15 @@ const VogalGame: FC<Props> = ({navigation}) => {
         
     ];
 
-    if(!partes[nowPage]) backHome();
+    if(!partes[nowPage]) {
+        console.log(`https://nbrasil.online/dspi/set?user=${userName}&p=25`)
+        fetch(`https://nbrasil.online/dspi/set?user=${userName}&p=25`)
+        .then(e=>{
+            setTimeout(()=>{
+                backHome();
+            },200)
+        })
+    }
 
   return (
     <View>

@@ -67,7 +67,7 @@ const LoginScreen: FC<Props> = ({navigation}) => {
       console.error(result);
       setMsg("Tente novamente")
     } else {
-      await AsyncStorage.setItem('@user', 'AtZlwcrrOxPC0zWKlyLIDPvXHj33');
+      await AsyncStorage.setItem('@user', email);
       Vibration.vibrate(1000);
       setMsg("")
       navigation.navigate('Home');
