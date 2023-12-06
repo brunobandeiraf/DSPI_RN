@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useState} from 'react';
+import React, {FC, useEffect, useState, useContext} from 'react';
 import {Pressable, View, useWindowDimensions,Text, Touchable, TouchableOpacity, Image, Vibration} from 'react-native';
 import {RouteProp} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
@@ -8,6 +8,7 @@ import {RootStackParamList} from '../App';
 import quizData from '../data.quiz';
 import Navbar from '../components/navbar';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { GamePointsContext } from '../context';
 
 type HomeScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -24,7 +25,7 @@ const HomeScreen: FC<Props> = ({navigation}) => {
   const window = useWindowDimensions();
   const [orientation, setOrientation] = useState('portrait');
   const [gameTitle, setGameTitle] = useState('');
-  const [gamePoints, setGamePoints] = useState(0);
+  const { gamePoints, setGamePoints } = useContext(GamePointsContext);
   const [gamePoints2, setGamePoints2] = useState(0);
   const [gameDesc, setGameDesc] = useState('');
   const [gameImg, setGameImg] = useState('');
@@ -51,11 +52,11 @@ const HomeScreen: FC<Props> = ({navigation}) => {
     fetch(`https://nbrasil.online/dspi/points?user=${userName}`)
     .then(e=>e.text())
     .then(e=>{
-      setGamePoints2(Number(e))
+      setGamePoints(Number(e))
       console.log(e);
     });
 
-  },[gamePoints2])
+  },[gamePoints])
 
 
 
@@ -71,7 +72,7 @@ const HomeScreen: FC<Props> = ({navigation}) => {
 
   const openGame = (quizName: string, image: string, desc: string, points: number, url: string) => {
     setGameTitle(quizName);
-    setGamePoints(points);
+    setGamePoints2(points);
     setGameDesc(desc);
     setGameImg(image);
     setGameUrl(url)
@@ -99,7 +100,7 @@ const HomeScreen: FC<Props> = ({navigation}) => {
 
         <View style={VStyles.headerin}>
           <Image source={require('../assets/str.png')} />
-          <Text style={VStyles.textheaderpoints}>{gamePoints2}</Text>
+          <Text style={VStyles.textheaderpoints}>{gamePoints}</Text>
         </View>
       </View>
 

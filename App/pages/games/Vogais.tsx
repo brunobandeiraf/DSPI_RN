@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useState} from 'react';
+import React, {FC, useEffect, useState, useContext} from 'react';
 import {
   Pressable,
   Text,
@@ -15,6 +15,7 @@ import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {RouteProp} from '@react-navigation/native';
 import VStyles from '../../styles/pages/games/vogais';
+import { GamePointsContext } from '../../context';
 
 // ROUTES
 
@@ -41,7 +42,7 @@ type Props = {
 const VogalGame: FC<Props> = ({navigation}) => {
     const [nowPage, setNowPage] = useState(0);
     const [lastAnsw, setNewAnsw] = useState(false);
-
+    const { gamePoints, setGamePoints } = useContext(GamePointsContext);
     const [userName, setUserName] = useState('');
   
   useEffect(()=>{
@@ -172,15 +173,30 @@ const VogalGame: FC<Props> = ({navigation}) => {
         
     ];
 
-    if(!partes[nowPage]) {
-        console.log(`https://nbrasil.online/dspi/set?user=${userName}&p=25`)
-        fetch(`https://nbrasil.online/dspi/set?user=${userName}&p=25`)
+
+    const getPoints = async () => {
+        await fetch(`https://nbrasil.online/dspi/points?user=${userName}`)
+        .then(e=>e.text())
         .then(e=>{
-            setTimeout(()=>{
-                backHome();
-            },200)
+            setGamePoints(Number(e))
+            backHome();
+        });
+    }
+
+    const setPoints = async () => {
+        await fetch(`https://nbrasil.online/dspi/set?user=${userName}&p=25`)
+        .then(e=>{
+            console.log("fetchado")
+            getPoints();
         })
     }
+
+    useEffect(() => {
+        if (!partes[nowPage]) {
+            setPoints();
+        }
+    }, [nowPage])
+
 
   return (
     <View>
