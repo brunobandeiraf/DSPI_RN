@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, {FC, useEffect, useState} from 'react';
 import {
   Pressable,
@@ -6,7 +7,7 @@ import {
   View,
   useWindowDimensions,
   TouchableOpacity,
-  Vibration
+  Vibration,
 } from 'react-native';
 
 // EXT
@@ -29,14 +30,15 @@ type Props = {
   route: DesiScreenRouteProp;
 };
 
-const DesiGame: FC<Props> = ({navigation}) => {  
-
+const DesiGame: FC<Props> = ({navigation}) => {
   return (
     <View style={VStyles.container}>
-        <Text style={VStyles.text}>Jogo em desenvolvimento!</Text>
-        <TouchableOpacity style={VStyles.bt} onPress={()=>navigation.navigate('Home')}>
-            <Text style={VStyles.btText}>Voltar</Text>
-        </TouchableOpacity>
+      <Text style={VStyles.text}>Jogo em desenvolvimento!</Text>
+      <TouchableOpacity
+        style={VStyles.bt}
+        onPress={() => navigation.navigate('Home')}>
+        <Text style={VStyles.btText}>Voltar</Text>
+      </TouchableOpacity>
     </View>
   );
 };

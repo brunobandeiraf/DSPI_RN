@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, {FC, useEffect, useState} from 'react';
 import {
   Pressable,
@@ -5,7 +6,7 @@ import {
   TextInput,
   View,
   useWindowDimensions,
-  TouchableOpacity
+  TouchableOpacity,
 } from 'react-native';
 import {RootStackParamList} from '../App';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
@@ -65,7 +66,7 @@ const SignupScreen: FC<Props> = ({navigation}) => {
       return;
     }
 
-    console.log(password, repeatPassword)
+    console.log(password, repeatPassword);
 
     const result = await fetchSignup(name, email, password, repeatPassword);
 
@@ -77,55 +78,62 @@ const SignupScreen: FC<Props> = ({navigation}) => {
   };
 
   return (
-    <View
-      style={ VStyles.container }>
-        <View style={VStyles.firstCont}>
-            <Text style={VStyles.title}>Champ Robot</Text>
-            <Text style={VStyles.subtitle}>Libras</Text>
+    <View style={VStyles.container}>
+      <View style={VStyles.firstCont}>
+        <Text style={VStyles.title}>Champ Robot</Text>
+        <Text style={VStyles.subtitle}>Libras</Text>
+      </View>
+
+      <View style={VStyles.midContainer}>
+        <View style={VStyles.inpsOut}>
+          <Text style={VStyles.innerTitle}>Nome</Text>
+          <TextInput
+            style={VStyles.inp}
+            value={name}
+            onChangeText={handleNameChange}
+            placeholder="Nome de usuário"
+          />
         </View>
-
-        <View style={VStyles.midContainer}>
-            <View style={VStyles.inpsOut}>
-                <Text style={VStyles.innerTitle}>Nome</Text>
-                <TextInput style={VStyles.inp} 
-                  value={name}
-                  onChangeText={handleNameChange}
-                  placeholder='Nome de usuário'/>
-            </View>
-            <View style={VStyles.inpsOut}>
-                <Text style={VStyles.innerTitle}>Email</Text>
-                <TextInput
-                style={VStyles.inp} 
-                value={email}
-                onChangeText={handleEmailChange}
-                placeholder='ex@gmail.com'/>
-            </View>
-            <View style={VStyles.inpsOut}>
-                <Text style={VStyles.innerTitle}>Senha</Text>
-                <TextInput secureTextEntry={true} style={VStyles.inp} 
-                value={password}
-                onChangeText={handlePasswordChange}
-                placeholder='********'/>
-            </View>
-            <View style={VStyles.inpsOut}>
-                <Text style={VStyles.innerTitle}>Repetir senha</Text>
-                <TextInput secureTextEntry={true} style={VStyles.inp} 
-                value={repeatPassword}
-                onChangeText={handleRepeatPasswordChange}
-                placeholder='********'/>
-            </View>
-            <View style={VStyles.inpsOut}>
-                <TouchableOpacity onPress={()=>signup()} style={VStyles.bt}>
-                    <Text style={VStyles.btin}>Entrar</Text>
-                </TouchableOpacity>
-            </View>
-
+        <View style={VStyles.inpsOut}>
+          <Text style={VStyles.innerTitle}>Email</Text>
+          <TextInput
+            style={VStyles.inp}
+            value={email}
+            onChangeText={handleEmailChange}
+            placeholder="ex@gmail.com"
+          />
         </View>
+        <View style={VStyles.inpsOut}>
+          <Text style={VStyles.innerTitle}>Senha</Text>
+          <TextInput
+            secureTextEntry={true}
+            style={VStyles.inp}
+            value={password}
+            onChangeText={handlePasswordChange}
+            placeholder="********"
+          />
+        </View>
+        <View style={VStyles.inpsOut}>
+          <Text style={VStyles.innerTitle}>Repetir senha</Text>
+          <TextInput
+            secureTextEntry={true}
+            style={VStyles.inp}
+            value={repeatPassword}
+            onChangeText={handleRepeatPasswordChange}
+            placeholder="********"
+          />
+        </View>
+        <View style={VStyles.inpsOut}>
+          <TouchableOpacity onPress={() => signup()} style={VStyles.bt}>
+            <Text style={VStyles.btin}>Entrar</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
 
-        <TouchableOpacity style={VStyles.registerOut} onPress={()=>goToLogin()}>
-            <Text style={VStyles.registerText1}>Já tem cadastro?</Text>
-            <Text style={VStyles.registerText2}>Clique aqui</Text>
-        </TouchableOpacity>
+      <TouchableOpacity style={VStyles.registerOut} onPress={() => goToLogin()}>
+        <Text style={VStyles.registerText1}>Já tem cadastro?</Text>
+        <Text style={VStyles.registerText2}>Clique aqui</Text>
+      </TouchableOpacity>
     </View>
   );
 };

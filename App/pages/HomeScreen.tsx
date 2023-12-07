@@ -1,5 +1,15 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, {FC, useEffect, useState, useContext} from 'react';
-import {Pressable, View, useWindowDimensions,Text, Touchable, TouchableOpacity, Image, Vibration} from 'react-native';
+import {
+  Pressable,
+  View,
+  useWindowDimensions,
+  Text,
+  Touchable,
+  TouchableOpacity,
+  Image,
+  Vibration,
+} from 'react-native';
 import {RouteProp} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import GameCard from '../components/GameCard';
@@ -8,7 +18,7 @@ import {RootStackParamList} from '../App';
 import quizData from '../data.quiz';
 import Navbar from '../components/navbar';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { GamePointsContext } from '../context';
+import {GamePointsContext} from '../context';
 
 type HomeScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -25,7 +35,7 @@ const HomeScreen: FC<Props> = ({navigation}) => {
   const window = useWindowDimensions();
   const [orientation, setOrientation] = useState('portrait');
   const [gameTitle, setGameTitle] = useState('');
-  const { gamePoints, setGamePoints } = useContext(GamePointsContext);
+  const {gamePoints, setGamePoints} = useContext(GamePointsContext);
   const [gamePoints2, setGamePoints2] = useState(0);
   const [gameDesc, setGameDesc] = useState('');
   const [gameImg, setGameImg] = useState('');
@@ -33,32 +43,24 @@ const HomeScreen: FC<Props> = ({navigation}) => {
   const [urlGame, setGameUrl] = useState('');
 
   const [userName, setUserName] = useState('');
-  
-  useEffect(()=>{
+
+  useEffect(() => {
     const getUser = async () => {
-      let res: any = await AsyncStorage.getItem("@user");
+      let res: any = await AsyncStorage.getItem('@user');
       setUserName(res);
+    };
 
-      
-    
-    }
-    
     getUser();
-  },[userName])
+  }, [userName]);
 
-  
-  useEffect(()=>{
-
+  useEffect(() => {
     fetch(`https://nbrasil.online/dspi/points?user=${userName}`)
-    .then(e=>e.text())
-    .then(e=>{
-      setGamePoints(Number(e))
-      console.log(e);
-    });
-
-  },[gamePoints])
-
-
+      .then(e => e.text())
+      .then(e => {
+        setGamePoints(Number(e));
+        console.log(e);
+      });
+  }, [gamePoints]);
 
   useEffect(() => {
     const newOrientation =
@@ -67,34 +69,42 @@ const HomeScreen: FC<Props> = ({navigation}) => {
   }, [window]);
 
   const goToGame = () => {
-    navigation.navigate(urlGame ? urlGame : "Desi");
+    navigation.navigate(urlGame ? urlGame : 'Desi');
   };
 
-  const openGame = (quizName: string, image: string, desc: string, points: number, url: string) => {
+  const openGame = (
+    quizName: string,
+    image: string,
+    desc: string,
+    points: number,
+    url: string,
+  ) => {
     setGameTitle(quizName);
     setGamePoints2(points);
     setGameDesc(desc);
     setGameImg(image);
-    setGameUrl(url)
-    setGameClass("block");
+    setGameUrl(url);
+    setGameClass('block');
   };
-  
-  
+
   const getGames = () => {
     return quizData.map(i => (
-        <TouchableOpacity key={quizData.indexOf(i)} onPress={()=>openGame(i.title, i.url, i.desc, i.points, i.page)} style={VStyles.card}>
-            <View style={VStyles.blackout}>
-              <Text style={VStyles.blackouttext}>{i.title}</Text>
-            </View>
-            <Image style={VStyles.imageCard} source={{uri: `${i.url}`}}/>
-        </TouchableOpacity>
+      <TouchableOpacity
+        key={quizData.indexOf(i)}
+        onPress={() => openGame(i.title, i.url, i.desc, i.points, i.page)}
+        style={VStyles.card}>
+        <View style={VStyles.blackout}>
+          <Text style={VStyles.blackouttext}>{i.title}</Text>
+        </View>
+        <Image style={VStyles.imageCard} source={{uri: `${i.url}`}} />
+      </TouchableOpacity>
     ));
-  }
+  };
   return (
     <View style={VStyles.container}>
       <View style={VStyles.header}>
         <View style={VStyles.headerin}>
-          <View style={VStyles.user}></View>
+          <View style={VStyles.user} />
           <Text style={VStyles.textheader}>{userName}</Text>
         </View>
 
@@ -106,9 +116,7 @@ const HomeScreen: FC<Props> = ({navigation}) => {
 
       <View style={VStyles.content}>
         <Text style={VStyles.title}>Jogos</Text>
-        <View style={VStyles.gamesout}>
-          {getGames()}
-        </View>
+        <View style={VStyles.gamesout}>{getGames()}</View>
       </View>
 
       {/* SHOW GAME INFOS  */}
@@ -123,11 +131,13 @@ const HomeScreen: FC<Props> = ({navigation}) => {
           </View>
           <Text style={VStyles.descGame}>{gameDesc}</Text>
 
-          <TouchableOpacity onPress={()=>goToGame()} style={VStyles.startGame}>
+          <TouchableOpacity
+            onPress={() => goToGame()}
+            style={VStyles.startGame}>
             <Text style={VStyles.startGameText}>Jogar</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={()=>setGameClass("none")}>
+          <TouchableOpacity onPress={() => setGameClass('none')}>
             <Text style={VStyles.fecharJogo}>Fechar</Text>
           </TouchableOpacity>
         </View>
