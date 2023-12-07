@@ -8,8 +8,8 @@
 #include <PubSubClient.h>
 #include <WiFiClientSecure.h>
 
-const char* ssid = "LAB_MAKER";
-const char* password = "Espaco@Maker2017";
+const char* ssid = "403_2.4";
+const char* password = "Dp031001#";
 
 const char* mqtt_server = "02d7d2d555084a4492039686d9f5b9a3.s1.eu.hivemq.cloud";
 const char* mqtt_username = "fullzer4";
@@ -54,8 +54,18 @@ oyi3B43njTOQ5yOf+1CceWxG1bQVs5ZufpsMljq4Ui0/1lvh+wjChP4kqKOJ2qxq
 4RgqsahDYVvTH9w7jXbyLeiNdd8XM2w9U/t7y0Ff/9yi0GE44Za4rF2LN9d11TPA
 mRGunUHBcnWEvgJBQl9nJEiU0Zsnvgc/ubhPgXRR4Xq37Z0j4r7g1SgEEzwxA57d
 emyPxgcYxn/eR44/KJ4EBs+lVDR3veyJm+kXQ99b21/+jh5Xos1AnX5iItreGCc=
------END CERTIFICATE-----
+-----END CERTIFICATE-----h à
 )EOF";
+
+void callback(char* topic, byte* payload, unsigned int length) {
+  Serial.print("Message arrived [");
+  Serial.print(topic);
+  Serial.print("] ");
+  for (int i = 0; i < length; i++) {
+    Serial.print((char)payload[i]);
+  }
+  Serial.println();
+}
 
 void setup_wifi() {
   delay(10);
@@ -83,7 +93,7 @@ void reconnect() {
     if (client.connect(clientId.c_str(), mqtt_username, mqtt_password)) {
       Serial.println("connected");
 
-      client.subscribe("led_state");
+      client.subscribe("topic/test");
     } else {
       Serial.print("failed, rc=");
       Serial.print(client.state());
@@ -106,6 +116,8 @@ void setup() {
   #endif
 
   client.setServer(mqtt_server, mqtt_port);
+
+  client.setCallback(callback);
   
 }
 

@@ -24,7 +24,7 @@ func MQTTPublishHandler(client mqtt.Client) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var payload struct {
 			Value bool `json:"value"`
-		}
+		} 
 
 		if err := json.NewDecoder(r.Body).Decode(&payload); err != nil {
 			http.Error(w, "Failed to parse request body", http.StatusBadRequest)
@@ -32,9 +32,9 @@ func MQTTPublishHandler(client mqtt.Client) http.HandlerFunc {
 		}
 
 		topic := "topic/test"
-		message := "Hello, MQTT!"
 
 		if payload.Value {
+			message := "acertou"
 			token := client.Publish(topic, 0, false, message)
 			token.Wait()
 
@@ -45,7 +45,16 @@ func MQTTPublishHandler(client mqtt.Client) http.HandlerFunc {
 
 			fmt.Fprintf(w, "MQTT message published successfully")
 		} else {
-			fmt.Fprintf(w, "No MQTT message published")
+			message := "errou"
+			token := client.Publish(topic, 0, false, message)
+			token.Wait()
+
+			if token.Error() != nil {
+				http.Error(w, "Failed to publish MQTT message", http.StatusInternalServerError)
+				return
+			}
+
+			fmt.Fprintf(w, "MQTT message published successfully")
 		}
 	}
 }
