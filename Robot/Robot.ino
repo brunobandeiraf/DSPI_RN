@@ -4,9 +4,17 @@
  #include <WiFi.h>
 #endif
 
-#include <ArduinoJson.h>
+#include <Adafruit_NeoPixel.h> // mudar se precisar
+#include <ArduinoJson.h> 
 #include <PubSubClient.h>
 #include <WiFiClientSecure.h>
+
+#define NUM_LEDS 1
+#define PIN_R 16
+#define PIN_G 4
+#define PIN_B 5
+
+Adafruit_NeoPixel strip = Adafruit_NeoPixel(NUM_LEDS, PIN_R, NEO_GRB + NEO_KHZ800);
 
 const char* ssid = "403_2.4";
 const char* password = "Dp031001#";
@@ -14,7 +22,7 @@ const char* password = "Dp031001#";
 const char* mqtt_server = "02d7d2d555084a4492039686d9f5b9a3.s1.eu.hivemq.cloud";
 const char* mqtt_username = "fullzer4";
 const char* mqtt_password = "Dp031001#";
-const int mqtt_port =8883;
+const int mqtt_port = 8883;
 
 WiFiClientSecure espClient;
 PubSubClient client(espClient);
@@ -61,10 +69,29 @@ void callback(char* topic, byte* payload, unsigned int length) {
   Serial.print("Message arrived [");
   Serial.print(topic);
   Serial.print("] ");
+
+  String message;
   for (int i = 0; i < length; i++) {
-    Serial.print((char)payload[i]);
+    message += (char)payload[i];
   }
-  Serial.println();
+
+  Serial.println(message);
+
+  if (message == "errou") {
+    strip.setPixelColor(0, strip.Color(255, 0, 0));
+    strip.show();
+    delay(1000);
+    strip.setPixelColor(0, strip.Color(0, 0, 0));  // (desliga)
+    strip.show();
+  } else if (message == "acertou") {
+    strip.setPixelColor(0, strip.Color(0, 255, 0));
+    strip.show();
+    delay(1000);
+    strip.setPixelColor(0, strip.Color(0, 0, 0));  // (desliga)
+    strip.show();
+  } else {
+    Serial.println("mensagem desconhecida");
+  }
 }
 
 void setup_wifi() {
@@ -118,6 +145,9 @@ void setup() {
   client.setServer(mqtt_server, mqtt_port);
 
   client.setCallback(callback);
+
+  strip.begin();
+  strip.show();
   
 }
 
