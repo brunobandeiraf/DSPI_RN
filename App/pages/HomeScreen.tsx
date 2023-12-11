@@ -48,18 +48,25 @@ const HomeScreen: FC<Props> = ({navigation}) => {
     const getUser = async () => {
       let res: any = await AsyncStorage.getItem('@user');
       setUserName(res);
+      getP()
+
     };
 
     getUser();
   }, [userName]);
 
-  useEffect(() => {
+  const getP = () => {
     fetch(`https://nbrasil.online/dspi/points?user=${userName}`)
       .then(e => e.text())
       .then(e => {
+        console.log(userName)
         setGamePoints(Number(e));
         console.log(e);
       });
+  }
+
+  useEffect(() => {
+    getP()
   }, [gamePoints]);
 
   useEffect(() => {

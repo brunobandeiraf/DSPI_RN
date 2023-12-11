@@ -26,6 +26,7 @@ import Second from '../../components/games/vogais/second';
 import Third from '../../components/games/vogais/third';
 import Quiz1 from '../../components/games/vogais/quiz1';
 import Result from '../../components/games/vogais/result';
+import Nome from '../../components/games/vogais/nome';
 
 type VogalScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -166,6 +167,10 @@ const VogalGame: FC<Props> = ({navigation}) => {
       leave={() => backHome()}
       res={lastAnsw}
     />,
+    <Nome
+      nextPage={() => nextp()}
+      leave={() => backHome()}
+    />,
 
     ];
 
@@ -183,7 +188,7 @@ const VogalGame: FC<Props> = ({navigation}) => {
       e => {
         console.log('fetchado');;
         getPoints();
-      },;
+      }
     );
   };
 

@@ -10,7 +10,14 @@ const quizData = [
     title: 'SINAIS',
     desc: 'Explore a magia das mãos e comece a jornada emocionante para aprender a linguagem de sinais brasileira, Libras, de uma maneira divertida e diferente. Neste primeiro exercício, vamos nos familiarizar com alguns SINAIS!',
     url: 'https://www.librasol.com.br/wp-content/uploads/2023/01/simbolos-ls-libras.jpg',
-    points: 50,
+    points: 25,
+    page: ""
+  },
+  {
+    title: 'ANIMAIS',
+    desc: 'Aprenda o mundo dos ANIMAIS com o nosso jogo, venha se divertir e aprender o quanto antes da maneira mais incrivel de todas!',
+    url: 'https://services.meteored.com/img/article/que-el-tamano-no-te-engane-estos-son-los-animales-mas-fuertes-del-mundo-1679848018823_768.jpg',
+    points: 25,
     page: ""
   },
 ];

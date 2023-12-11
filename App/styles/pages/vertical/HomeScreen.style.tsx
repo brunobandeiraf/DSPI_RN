@@ -23,7 +23,7 @@ const VStyles = StyleSheet.create({
     alignItems: "center"
   },
   textheader: {
-    fontSize: 22,
+    fontSize: 18,
     fontWeight: "700",
     fontFamily: 'TitanOne-Regular',
   },
