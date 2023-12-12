@@ -167,11 +167,28 @@ const VogalGame: FC<Props> = ({navigation}) => {
       leave={() => backHome()}
       res={lastAnsw}
     />,
+    <First
+      nextPage={() => nextp()}
+      voltar={() => voltar()}
+      leave={() => backHome()}
+      letter="U"
+    />,
+    <Quiz1
+      nextPage={(e: string) => nextp(e)}
+      voltar={() => voltar()}
+      leave={() => backHome()}
+      letter="U"
+    />,
+    <Result
+      nextPage={() => nextp()}
+      voltar={() => voltar()}
+      leave={() => backHome()}
+      res={lastAnsw}
+    />,
     <Nome
       nextPage={() => nextp()}
       leave={() => backHome()}
     />,
-
     ];
 
   const getPoints = async () => {
