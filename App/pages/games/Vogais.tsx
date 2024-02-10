@@ -73,7 +73,7 @@ const VogalGame: FC<Props> = ({navigation}) => {
 
   const backHome = () => {
     navigation.navigate('Home');
-    fetch('https://nbrasil.online/dspi/points');
+    fetch('https://nbrasil.online/TUDO/dspi/points');
   };
 
   const partes = [
@@ -192,7 +192,7 @@ const VogalGame: FC<Props> = ({navigation}) => {
     ];
 
   const getPoints = async () => {
-    await fetch(`https://nbrasil.online/dspi/points?user=${userName}`)
+    await fetch(`https://nbrasil.online/TUDO/dspi/points?user=${userName}`)
       .then(e => e.text())
       .then(e => {
         setGamePoints(Number(e));;
@@ -201,7 +201,7 @@ const VogalGame: FC<Props> = ({navigation}) => {
   };;
 
   const setPoints = async () => {
-    await fetch(`https://nbrasil.online/dspi/set?user=${userName}&p=25`).then(
+    await fetch(`https://nbrasil.online/TUDO/dspi/set?user=${userName}&p=25`).then(
       e => {
         console.log('fetchado');;
         getPoints();

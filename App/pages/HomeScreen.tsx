@@ -56,7 +56,7 @@ const HomeScreen: FC<Props> = ({navigation}) => {
   }, [userName]);
 
   const getP = () => {
-    fetch(`https://nbrasil.online/dspi/points?user=${userName}`)
+    fetch(`https://nbrasil.online/TUDO/dspi/points?user=${userName}`)
       .then(e => e.text())
       .then(e => {
         console.log(userName)
